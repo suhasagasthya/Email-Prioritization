@@ -20,7 +20,7 @@ from textEmails import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', include('textEmails.urls')),
-    url(r'^$', views.InboxView, name='home'),
+    url(r'^contactus/', views.ContactUsView.as_view(), name='contact_view'),
+    url(r'^$', views.InboxView.as_view(), name='home'),
 
 ]
