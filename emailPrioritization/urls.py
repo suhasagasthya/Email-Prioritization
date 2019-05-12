@@ -21,6 +21,15 @@ from textEmails import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^contactus/', views.ContactUsView.as_view(), name='contact_view'),
+    url(r'^about/', views.AboutView.as_view(), name='about_view'),
     url(r'^$', views.InboxView.as_view(), name='home'),
+    url(r'^home/', views.HomeView, name='mailbox'),
+    url(r'^priority1/', views.P1View, name='p1urls'),
+    url(r'^priority2/', views.P2View, name='p2urls'),
+    url(r'^priority3/', views.P3View, name='p3urls'),
+    url(r'^new_mail/', views.sendmail, name='new_mail'),
+    url(r'^inbox/', views.priority_select, name='selection_p'),
+
+
 
 ]

@@ -9,5 +9,7 @@ class Email(models.Model):
     from_name = models.CharField(max_length=25)
     to_name = models.CharField(max_length=25)
     subject = models.CharField(max_length=256)
-    body = models.CharField(max_length=256)
+    body = models.TextField()
     date = models.DateTimeField()
+    priority = models.CharField(max_length=256)
+
