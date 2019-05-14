@@ -18,13 +18,13 @@ class InboxView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        mail = Email.objects.all()
+        mail = Email.objects.all().order_by('-date')
         context['mails'] = mail
         return context
 
 
 def HomeView(request):
-    mail = Email.objects.all()
+    mail = Email.objects.all().order_by('-date')
     pri1 = request.session['pri1']
     pri2 = request.session['pri2']
     pri3 = request.session['pri3']
@@ -40,7 +40,7 @@ def P1View(request):
     pri1 = request.session['pri1']
     pri2 = request.session['pri2']
     pri3 = request.session['pri3']
-    mail = Email.objects.filter(priority__icontains=pri1)
+    mail = Email.objects.filter(priority__icontains=pri1).order_by('-date')
     number_p1 = Email.objects.filter(priority__icontains=pri1).count()
 
     return render(request, 'textEmails/priority1.html', {'number1': number_p1, 'priority1': pri1, 'priority2': pri2, 'priority3': pri3, 'mails': mail})
@@ -50,7 +50,7 @@ def P2View(request):
     pri1 = request.session['pri1']
     pri2 = request.session['pri2']
     pri3 = request.session['pri3']
-    mail = Email.objects.filter(priority__icontains=pri2)
+    mail = Email.objects.filter(priority__icontains=pri2).order_by('-date')
     number_p2 = Email.objects.filter(priority__icontains=pri2).count()
 
     return render(request, 'textEmails/priority2.html', {'number2': number_p2, 'priority1': pri1, 'priority2': pri2, 'priority3': pri3, 'mails': mail})
@@ -60,7 +60,7 @@ def P3View(request):
     pri1 = request.session['pri1']
     pri2 = request.session['pri2']
     pri3 = request.session['pri3']
-    mail = Email.objects.filter(priority__icontains=pri3)
+    mail = Email.objects.filter(priority__icontains=pri3).order_by('-date')
     number_p3 = Email.objects.filter(priority__icontains=pri3).count()
 
     return render(request, 'textEmails/priority3.html', {'number3': number_p3, 'priority1': pri1, 'priority2': pri2, 'priority3': pri3, 'mails': mail})
@@ -70,7 +70,7 @@ def sendmail(request):
     pri1 = request.session['pri1']
     pri2 = request.session['pri2']
     pri3 = request.session['pri3']
-    mail = Email.objects.all()
+    mail = Email.objects.all().order_by('-date')
 
     if request.method == 'POST':
 
@@ -109,7 +109,7 @@ def sendmail(request):
 
 def priority_select(request):
     if request.method == 'POST':
-        mail = Email.objects.all()
+        mail = Email.objects.all().order_by('-date')
         pri1 = request.POST.get('priority1')
         pri2 = request.POST.get('priority2')
         pri3 = request.POST.get('priority3')
