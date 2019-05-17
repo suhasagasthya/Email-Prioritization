@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect, render_to_response
 from django.views.generic import TemplateView
 from textEmails.models import *
-import requests as req
+import requests as requestinghttps
 import datetime
 import json
 
@@ -21,6 +21,7 @@ class InboxView(TemplateView):
         mail = Email.objects.all().order_by('-date')
         context['mails'] = mail
         return context
+
 
 
 def HomeView(request):
@@ -73,18 +74,16 @@ def sendmail(request):
     mail = Email.objects.all().order_by('-date')
 
     if request.method == 'POST':
-
-
+        from_name = request.POST.get('sender_name')
         to_mail = "suhasagasthya@gmail.com"
         from_mail = request.POST.get('email')
-        from_name = request.POST.get('sender_name')
         to_name = "Suhas Agasthya"
         subject = request.POST.get('subject')
         mail_body = request.POST.get('content')
-
-        categ = req.get(url='http://ec2-54-157-56-76.compute-1.amazonaws.com:5000/run_model', params={'mails':mail_body})
+        categ = requestinghttps.get(url='http://ec2-54-162-218-173.compute-1.amazonaws.com:5000/run_model', params={'mails': mail_body})
         ans = categ.json()
         category = json.loads(ans)
+        print(category)
 
         dates = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 

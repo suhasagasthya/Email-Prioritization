@@ -100,6 +100,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><br>
 
             </div>
+            <div style="margin-left: 25px;">
             <form class="form-horizontal" method="post" role="form" action="{% url 'new_mail' %}">
                 {% csrf_token %}
                 <fieldset>
@@ -107,7 +108,7 @@
                     <!-- Form Name -->
                     <legend>Compose New Mail</legend>
                     <br>
-                    <!-- Text input-->
+                    <!-- Text input-->s
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="email">Sender's Name:</label>
                         <div class="col-md-5">
@@ -137,7 +138,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="content">Body:</label>
                         <div class="col-md-4">
-                            <textarea class="form-control" id="content" name="content" rows="4" cols="50"></textarea>
+                            <textarea class="form-control" id="content" name="content" rows="6" cols="120" style="height: 40px; width: 300px;"></textarea>
                         </div>
                     </div>
 
@@ -146,8 +147,9 @@
                 <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" style="margin-right: 20px;">Send Email</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
+                </div>
             </form>
+            </div>
         </div>
     </div>
 </div>
